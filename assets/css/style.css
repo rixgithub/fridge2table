@@ -1,0 +1,183 @@
+#main {
+    background-image: url('../images/4.jpg');
+  
+    font-family: 'Open Sans', sans-serif;
+    margin:10px;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+
+}
+
+#fridgepage
+ {
+    background-image: url('../images/13.jpg');
+    font-family: 'Open Sans', sans-serif;
+    margin:10px;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+
+}
+.table{
+    width: 500px;
+}
+
+#recipePage
+{
+    background-color: lightgray;
+    margin: 10px;
+}
+
+body,
+div,
+button,
+form,
+{
+  margin: 10px;
+}
+button{
+	position: relative;
+}
+img{
+    width:250px;
+    height:250px;
+}
+p{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+h2  {
+    text-align: center;
+    color: black;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 65px;
+    font-family: 'Open Sans', sans-serif;
+}
+h3 {
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 40px;
+}
+h5{
+    color:black;
+    font-family: 'Open Sans', sans-serif;
+    font:italic;
+}
+.fridgejumbo{
+   /* background-image: url('../images/11.jpg');*/
+   background-color: lightgray;
+   height: 300px;
+}
+#fridgeform{
+    margin-left: 100px;
+}
+.jumbotron {
+	background-image: url('../images/12.jpg');
+	color:black;
+	font:italic;
+	height: 100%;
+	width: 100%;
+	background-size: cover;
+}
+#itemsFridge{
+	position: relative;
+	margin: 10px;
+}
+.jumbotron .container {
+position: relative;
+top:100px;
+}
+/*
+.container{
+    background-color: lightgray;
+    margin: 10px;
+    color:black;
+    opacity: 0.8;
+}
+*/
+.panel-body {
+	background-color: lightgray; 
+	color: black;
+	
+
+}
+.heading{
+    text-align: center;
+    color: white;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 65px;
+    font-family: 'Open Sans', sans-serif;
+}
+.help-block{
+  text-align: left;
+  color: black;
+  font-style: italic;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+}
+.container-fluid1{
+    background-color: lightgrey;
+    margin: 10px;
+}
+#row1{
+	position: relative;
+}
+
+#imagePick{
+	position: relative;
+	top:50px;
+}
+
+#recipe-view{
+	position: relative;
+	top:50px;
+}
+#recipe-video{
+	position: relative;
+	top:50px;
+}
+
+.recipe{
+    position: relative;
+    float:left;
+    top:100px;
+    margin: 10px;
+}
+
+#row0{
+    background-color: lightgrey;
+   height: 100px;
+}
+/*
+#login{
+
+    width: 400px;
+    height: 300px;
+}
+*/
+
+.form_bg {
+    background-color:#eee;
+    color:#666;
+    padding:20px;
+    border-radius:10px;
+    border:1px solid #fff;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left:200px;
+    width:400px;
+    height:300px;
+}
+.align-center {
+    text-align:center;
+ 
+}
+.col-md-4{
+    width:400px;
+    height:300px;
+}
