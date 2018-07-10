@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>F2T-Fridge</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Google Fonts link-->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" type='text/css'>
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="../assets/css/fridge.css">
+
+</head>
+
+<body> 
+  
+<div class="container" id="mainDiv">
+  
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">PROFILE</h3>
+        </div>
+        <div class="panel-body">
+          <h3><span id="userName"></span></h3>
+          <button type="button" class="btn btn-danger btn-block" id="btnLogout"><span class="glyphicon glyphicon-user"></span> LOGOUT</button>
+          <br>
+          <a class="btn btn-primary btn-block" id="getRecipe" href="./recipe.html" role="button">RECIPES</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">FRIDGE 2 TABLE</h3>
+        </div>
+        <div class="panel-body">
+          <h4>Brooklyn migas shaman, forage glossier meggings poke fanny pack prism. Kinfolk scenester air plant single-origin coffee, paleo letterpress actually.</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">ADD AN ITEM TO YOUR FRIDGE</h3>
+        </div>
+        <div class="panel-body">
+          <form>
+            <div class="form-group">
+              <label for="itemName">Item Name</label>
+              <input type="text" class="form-control" id="inputItemName">
+            </div>  
+            <div class="form-group">
+              <label for="itemQuantity">Item Quantity</label>
+              <input type="text" class="form-control" id="inputItemQuantity">
+            </div>
+            <div class="form-group">
+              <label for="expirationDate">Expiration Date</label>
+              <input type="date" class="form-control" id="inputExpirationDate">
+            </div>
+            <button type="submit" class="btn btn-success btn-block" id="itemSubmitButton">ADD ITEM</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">ITEMS IN YOUR FRIDGE</h3>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Quantity</th>
+                  <th>Date Added</th>
+                  <th>Expiration Date</th>
+                  <th>Remove Item</th>
+                </tr>
+              </thead>
+              <tbody id="ingredientsTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+  <!-- ***** Firebase ***** -->
+  <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <!-- jQuery UI-->
+  <script src="../assets/javascript/jquery-ui.min.js"></script>
+    <!-- Firebase Reference -->
+  <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+  <!--moment.js-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+   <!-- Bootstrap javascript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!--javascript-->
+  <script src="../assets/javascript/fridge.js"></script>
+</body>
+</html>

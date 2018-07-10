@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>F2T-Recipe</title>
+  
+  <!-- jQuery UI CSS -->
+  <link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
+  
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  
+  <!-- Google Fonts link-->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" type='text/css'>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="../assets/css/recipe.css">
+
+</head>
+
+<body> 
+
+<div class="container" id="mainDiv">
+  
+  <div class="col-sm-9">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">PROFILE</h3>
+          </div>
+          <div class="panel-body">
+            <h3><span id="userName"></span></h3>
+            <button type="button" class="btn btn-danger btn-block" id="btnLogout"><span class="glyphicon glyphicon-user"></span> LOGOUT</button>
+            <br>
+            <a class="btn btn-primary btn-block" href="./fridge.html" role="button">FRIDGE</a>
+            <br>
+            <button type="button" class="btn btn-success btn-block" onclick="getRecipe()">GET RECIPES</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">FRIDGE 2 TABLE</h3>
+          </div>
+          <div class="panel-body">
+            <h4>Brooklyn migas shaman, forage glossier meggings poke fanny pack prism. Kinfolk scenester air plant single-origin coffee, paleo letterpress actually.</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title" id="recipePanelTitle">RECIPES</h3>
+          </div>
+          <div class="panel-body" id="resultsDiv">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">ITEMS IN FRIDGE</h3>
+      </div>
+      <div class="panel-body">
+        <h3 id="fridgeItems"></h3>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<script id="recipes-template" type="text/x-handlebars-template">
+  {{#each results}}
+    <div class="well">
+        <div class="row">
+          <div class="col-sm-4">
+            <img src="{{image}}" class="img-responsive jpg img-thumbnail" alt="Responsive image" data-title="{{title}}" data-id="{{id}}">
+          </div>
+          <div class="col-sm-8">
+            <h2>{{title}}</h2>
+            <h3>Ingredients used: {{usedIngredientCount}}</h3>
+            <h3>Missing ingredients: {{missedIngredientCount}}</h3>
+          </div>
+        </div>
+    </div>
+  {{/each}}
+</script>
+
+<script id="chosenRecipe-template" type="text/x-handlebars-template">
+  <div class="well">
+    
+    <div class="row">
+      <div class="col-sm-6">
+        <img id="chosenRecipeImage" class="img-responsive jpg img-thumbnail" alt="Responsive image">
+      </div>
+      <div class="col-sm-6">
+        <div class="panel-body">
+          <h1 id="chosenRecipeTitle"></h1>
+          <br>
+          <br>
+          <button type="button" class="btn btn-warning btn-block" id="btnVideos">VIDEOS</button>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="panel-body">
+          {{#each 0.steps}}  
+            <h3>Step {{number}}</h3>
+            <h3>Equipment needed</h3>
+              {{#each equipment}}
+                <h4>{{name}}</h4>
+              {{/each}}
+            <h3>Ingredients needed</h3>
+            {{#each ingredients}}
+                <h4>{{name}}</h4>
+              {{/each}}
+            <h3>Instructions</h3>
+            <h4>{{step}}</h4>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+  <!-- ***** Handlebars ***** -->
+  <script src="../assets/javascript/handlebars-v4.0.11.js"></script>
+  <!-- ***** Firebase ***** -->
+  <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <!-- jQuery UI-->
+  <script src="../assets/javascript/jquery-ui.min.js"></script>
+  <!-- jQuery UI-->
+  <script src="../assets/javascript/jquery.js"></script>
+    <!-- Firebase Reference -->
+  <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+  <!--moment.js-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+  <!--javascript-->
+  <script src="../assets/javascript/recipe.js"></script>
+   <!-- Bootstrap javascript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
+</body>
+</html>
