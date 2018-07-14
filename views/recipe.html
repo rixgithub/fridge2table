@@ -47,7 +47,7 @@
             <h3 class="panel-title">FRIDGE 2 TABLE</h3>
           </div>
           <div class="panel-body">
-            <h4>Brooklyn migas shaman, forage glossier meggings poke fanny pack prism. Kinfolk scenester air plant single-origin coffee, paleo letterpress actually.</h4>
+            <h4 id="foodTrivia"></h4>
           </div>
         </div>
       </div>
@@ -79,6 +79,37 @@
   
 </div>
 
+
+<!-- <<<<<< BEGIN MODAL for videos >>>>>> -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="panel-heading">
+        <h2 class="panel-title" id="videoTitleOne"></h2>
+      </div>
+      <div class="modal-body">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" id="modalVideoOne"></iframe>
+        </div>
+      </div>
+      <div class="panel-heading">
+        <h2 class="panel-title" id="videoTitleTwo"></h2>
+      </div>
+      <div class="modal-body">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" id="modalVideoTwo"></iframe>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="modalButton" class="btn btn-default btn-block" data-dismiss="modal">CLOSE</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- <<<<<< END MODAL for videos >>>>>> -->
+
+
+
 <script id="recipes-template" type="text/x-handlebars-template">
   {{#each results}}
     <div class="well">
@@ -108,7 +139,7 @@
           <h1 id="chosenRecipeTitle"></h1>
           <br>
           <br>
-          <button type="button" class="btn btn-warning btn-block" id="btnVideos">VIDEOS</button>
+          <button type="button" class="btn btn-warning btn-block" id="videosButton">VIDEOS</button>
         </div>
     </div>
 
@@ -140,18 +171,12 @@
   <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <!-- jQuery UI-->
-  <script src="../assets/javascript/jquery-ui.min.js"></script>
-  <!-- jQuery UI-->
-  <script src="../assets/javascript/jquery.js"></script>
-    <!-- Firebase Reference -->
-  <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
   <!--moment.js-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
-  <!--javascript-->
-  <script src="../assets/javascript/recipe.js"></script>
    <!-- Bootstrap javascript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!--javascript-->
+  <script src="../assets/javascript/recipe.js"></script>
   
 </body>
 </html>

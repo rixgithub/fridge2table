@@ -13,6 +13,7 @@ var database = firebase.database();
 
 var itemList = [];
 var items = "";
+var recipeTitle = "";
 
 // <<<<<< BEGIN log out event >>>>>>
 $("#btnLogout").on("click", function(event) {
@@ -40,11 +41,13 @@ function getRecipe() {
 	  success: function(data) {
 	    
       $("#resultsDiv").empty();
+      $("#recipePanelTitle").empty();
+      $("#recipePanelTitle").append("RECIPES");
       
       createRecipesHTML(data);
  
     },
-	  error: function(err) { alert(err); },
+	  error: function(err) { console.log(err); },
 	  beforeSend: function(xhr) {
       xhr.setRequestHeader("X-Mashape-Authorization", "UjeKODDd3umshkg8ScHkWRx8aQW7p1Cj6eYjsn4NOz1U399GXM"); // Enter here your Mashape key
 	  }
@@ -61,29 +64,12 @@ $("#resultsDiv").on("click",".jpg", function () {
   $("#recipePanelTitle").append("RECIPE INSTRUCTIONS");
 
   var recipeID = $(this).attr("data-ID");
-  var recipeTitle = $(this).attr("data-title");
-  var recipeImage = $(this).attr("src");
-
-	// // Using Jquery UI to display transition effects - hiding and displaying images
-	// $("#resultsDiv").effect("drop");
-	// $("#recipe-view").effect("slide");
-
- //  	// Display selected recipe image
- //    var recipeInput = $(this).attr("data-name");
- //    var recipeID = $(this).attr("data-ID");
- //    var recipePic = $("<div id='imagePic'>");
- //    var image = $(this).attr("data-img");
-    
-	// $("#imagePic").html("<img src="+image+">");
-	// $("#search").hide("slide");
-
-	var queryURL = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyAGlrgn7TPlpZMhX5rEXyLTPtX5boTIKA8&part=snippet&maxResults=3&type=video&videoEmbeddable=true&q=food,recipe" + recipeTitle + "&alt=json";               
-	var queryURL2 = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + recipeID + "/analyzedInstructions?stepBreakdown=true";
-
+  recipeTitle = $(this).attr("data-title");
+  var recipeImage = $(this).attr("src");         
 
   // Spoonacular API call for recipe instructions
   var output = $.ajax({
-    url: queryURL2,
+    url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + recipeID + "/analyzedInstructions?stepBreakdown=true",
     type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
     data: {}, // Additional parameters here
     dataType: 'json',
@@ -104,33 +90,24 @@ $("#resultsDiv").on("click",".jpg", function () {
 
 });// ^^^^^^ END on click event clicking food image ^^^^^^
 
+// <<<<<< BEGIN button click for videos >>>>>>
+$(".panel-body").on("click", "#videosButton", function () {
+  
+  $.ajax({
+    url: "https://www.googleapis.com/youtube/v3/search?key=AIzaSyAGlrgn7TPlpZMhX5rEXyLTPtX5boTIKA8&part=snippet&maxResults=3&type=video&videoEmbeddable=true&q=food,recipe" + recipeTitle + "&alt=json",
+    method: "GET"
+  }).done(function(response) {
 
-//  // ----You Tube Videos-----
- //  $.ajax({
- //    url: queryURL,
- //    method: "GET"
- //  }).done(function(response) {
- //  $("#recipe-video").html("<h3>Additional Recipe Recommendations</h3><br>");
+    $("#modalVideoOne").attr("src", "https://www.youtube.com/embed/" + response.items[0].id.videoId +"?autoplay=0");
+    $("#modalVideoTwo").attr("src", "https://www.youtube.com/embed/" + response.items[1].id.videoId +"?autoplay=0");
 
- //    for (i = 0; i < response.items.length; i++) {
- //      var videoDiv = $("<div>");
- //      videoDiv.attr("class", "embed-responsive embed-responsive-16by9");
- //      var videoTitle = response.items[i].snippet.title;
- //      var p = $("<p id='pVideoTitle'>").text(videoTitle);
- //      var videoId = response.items[i].id.videoId;
- //      var videoPlayer = $("<iframe>");
- //      videoPlayer.attr("src", "https://www.youtube.com/embed/" + response.items[i].id.videoId +"?autoplay=0");
- //      videoPlayer.attr("width", "500");
- //      videoPlayer.attr("height", "300"); 
- //      videoPlayer.attr("class", "embed-responsive-item"); 
- //      videoDiv.append(videoPlayer);
- //      $("#recipe-video").append(p);
- //      $("#recipe-video").append(videoDiv);
- //    } 
- //  });
- //  // ----You Tube Videos-----
+    $('#myModal').modal();
 
+  }); 
 
+});
+//  ^^^^^^ END button click for videos ^^^^^^
+  
 
 // <<<<<< BEGIN realtime database listener >>>>>>
 firebase.auth().onAuthStateChanged(function(user) {
@@ -151,6 +128,23 @@ firebase.auth().onAuthStateChanged(function(user) {
       $("#fridgeItems").append("<h3>" + itemName.toUpperCase() + "</h3>");
     	itemList.push(itemName);
 	  });
+
+     // Spoonacular API call for food trivia
+    var output = $.ajax({
+      url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/trivia/random",
+      type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+      data: {}, // Additional parameters here
+      dataType: 'json',
+      success: function(triviaData) {
+
+        $("#foodTrivia").append(triviaData.text);
+        
+      },
+      error: function(err) { console.log(err); },
+      beforeSend: function(xhr) {
+      xhr.setRequestHeader("X-Mashape-Authorization", "UjeKODDd3umshkg8ScHkWRx8aQW7p1Cj6eYjsn4NOz1U399GXM"); // Enter here your Mashape key
+      }
+    });
     
   } else {
     console.log("No user is logged in.");
@@ -160,7 +154,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 // ^^^^^^ END realtime database listener ^^^^^^
 
 
-
+// function for handlebars template recipes
 function createRecipesHTML(recipesData) {
   var source = document.getElementById("recipes-template").innerHTML;
   var template = Handlebars.compile(source);
@@ -170,6 +164,7 @@ function createRecipesHTML(recipesData) {
   recipesDiv.innerHTML = html;
 }
 
+// function for handlebars template one chosen recipe
 function createChosenRecipeHTML(recipeData) {
   var source = document.getElementById("chosenRecipe-template").innerHTML;
   var template = Handlebars.compile(source);
@@ -178,3 +173,6 @@ function createChosenRecipeHTML(recipeData) {
   var recipeInstructionDiv = document.getElementById("resultsDiv");
   recipeInstructionDiv.innerHTML = html;
 }
+
+
+

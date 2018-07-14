@@ -78,41 +78,59 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     var fridgeRef = firebase.database().ref('users/' + user.uid + '/fridge');
     fridgeRef.on('child_added', function(snapshot) {
-		var tableRow = $("<tr>");
-		itemName = snapshot.val().itemName;
-		itemQuantity = snapshot.val().itemQuantity;
-		currentDate = snapshot.val().currentDate;
-		expirationDate = snapshot.val().expirationDate;
+  		var tableRow = $("<tr>");
+  		itemName = snapshot.val().itemName;
+  		itemQuantity = snapshot.val().itemQuantity;
+  		currentDate = snapshot.val().currentDate;
+  		expirationDate = snapshot.val().expirationDate;
 
-		var fridgeArray = [itemName, itemQuantity, currentDate, expirationDate];
-		var ingredientsList = [itemName];
+  		var fridgeArray = [itemName, itemQuantity, currentDate, expirationDate];
+  		var ingredientsList = [itemName];
 
-		// Appending "remove" button and item keys for each row in firebase database 
-		$("#ingredientsTable").append("<tr id="+snapshot.key+"><td>"+ snapshot.val().itemName +"</td>"+
-		    "<td>"+ snapshot.val().itemQuantity +"</td>"+
-		    "<td>"+ snapshot.val().currentDate +"</td>"+
-		    "<td>"+ snapshot.val().expirationDate +"</td>"+
-		    "<td class='remove'><input type='submit' value='REMOVE' class='remove-item btn btn-warning btn-sm'>"+ 
-		    "</td></tr>");
+  		// Appending "remove" button and item keys for each row in firebase database 
+  		$("#ingredientsTable").append("<tr id="+snapshot.key+"><td>"+ snapshot.val().itemName +"</td>"+
+  		    "<td>"+ snapshot.val().itemQuantity +"</td>"+
+  		    "<td>"+ snapshot.val().currentDate +"</td>"+
+  		    "<td>"+ snapshot.val().expirationDate +"</td>"+
+  		    "<td class='remove'><input type='submit' value='REMOVE' class='remove-item btn btn-warning btn-sm'>"+ 
+  		    "</td></tr>");
 
-		// For loop for table
-		for(var i = 0; i<fridgeArray.length; i++) {
-			var tableData = $("<td>");
-			tableData.text(fridgeArray[i]);   
-			items = (fridgeArray[0]);    
-			tableRow.append(tableData);
-		};
+  		// For loop for table
+  		for(var i = 0; i<fridgeArray.length; i++) {
+  			var tableData = $("<td>");
+  			tableData.text(fridgeArray[i]);   
+  			items = (fridgeArray[0]);    
+  			tableRow.append(tableData);
+  		};
 		  
-		itemList.push(fridgeArray[0]);  
+		  itemList.push(fridgeArray[0]);  
 
-			//Code that removes item row in firebase database
-		$("body").on("click", ".remove-item", function(){
-			var getKey = "";
-		    $(this).closest('tr').remove();
-		    getKey = $(this).parent().parent().attr('id');
-		    database.ref('users/' + user.uid + '/fridge/' + getKey).remove();
-		});
-	});
+  			//Code that removes item row in firebase database
+  		$("body").on("click", ".remove-item", function(){
+  			var getKey = "";
+  		    $(this).closest('tr').remove();
+  		    getKey = $(this).parent().parent().attr('id');
+  		    database.ref('users/' + user.uid + '/fridge/' + getKey).remove();
+		  });
+	  });
+
+     // Spoonacular API call for food trivia
+    var output = $.ajax({
+      url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/trivia/random",
+      type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+      data: {}, // Additional parameters here
+      dataType: 'json',
+      success: function(triviaData) {
+
+        $("#foodTrivia").append(triviaData.text);
+
+      },
+      error: function(err) { console.log(err); },
+      beforeSend: function(xhr) {
+      xhr.setRequestHeader("X-Mashape-Authorization", "UjeKODDd3umshkg8ScHkWRx8aQW7p1Cj6eYjsn4NOz1U399GXM"); // Enter here your Mashape key
+      }
+    });
+
 
   } else {
     console.log("No user is logged in.");
